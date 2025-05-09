@@ -35,3 +35,71 @@ You can install dependencies with:
 
 ```bash
 poetry install
+````
+
+Ensure `pyo` can access your audio hardware. If needed, check your devices with:
+
+```python
+from pyo import *
+print(pa_list_devices())
+```
+
+---
+
+## 🛠️ Device Setup (Linux)
+
+We hardcoded the audio setup based on `pa_list_devices()`:
+
+* **Input Device**: TONOR TC30 USB Microphone → `input_device = 4`
+* **Output Device**: Default output (headphones or speakers) → `output_device = 8`
+* **Sample Rate**: Forced to `48000 Hz` to ensure compatibility between devices
+
+---
+
+## 🧠 PID Controller
+
+The controller updates every 50 ms:
+
+* Reference amplitude: `A_ref = 0.3`
+* PID Gains:
+
+  * Proportional: `Kp = 0.8`
+  * Integral: `Ki = 0.3`
+  * Derivative: `Kd = 0.1`
+* Gain output `G(t)` is clipped to stay between `0.3` and `0.9`.
+
+---
+
+## 🖥️ Running the App
+
+Launch the delay effect pedal with:
+
+```bash
+poetry run python src/guitar_pedal/main.py
+```
+
+This will:
+
+* Open the Pyo GUI
+* Start processing audio in real time
+
+---
+
+## 🧩 Future Additions
+
+* Tempo detection (for beat-synced delay)
+* Pitch tracking for shimmer effects or harmonizing
+* GUI controls for PID tuning or delay modulation
+* Export as a VST plugin using JUCE or Faust
+
+---
+
+## 📜 License
+
+MIT License. Developed as a creative prototype combining control theory with digital audio.
+
+---
+
+## 🙌 Credits
+
+Created by [Adrian Guel](https://github.com/AdrianGuel), inspired by real-time control systems and guitar effects design.
