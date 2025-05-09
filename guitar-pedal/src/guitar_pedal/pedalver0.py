@@ -37,8 +37,8 @@ mix.out()
 # ----------------------------------------
 # PID CONTROLLER SETUP
 # ----------------------------------------
-Kp, Ki, Kd = 0.8, 0.3, 0.1
-A_ref = 0.8  # Target RMS amplitude
+Kp, Ki, Kd = 10, 0.5, 0.2
+A_ref = 0.02  # Target RMS amplitude
 e_sum = 0
 e_prev = 0
 dt = 0.05  # Update interval in seconds
